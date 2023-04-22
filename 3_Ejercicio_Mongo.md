@@ -81,6 +81,7 @@ Resultado:
 Respuesta:
 ```
 db.film.aggregate([
+db.film.aggregate([
   {
     $lookup: {
       from: "language",
@@ -95,7 +96,7 @@ db.film.aggregate([
   {
     $group: {
       _id: "$language.name", count: {$sum:1},
-      total: { $sum: "$_id" }
+      
     }
   },
   {
