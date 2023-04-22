@@ -146,15 +146,15 @@ db.film_actor.aggregate([
   { $unwind: "$actor" },
   { $group: {
       _id: "$actor.first_name",
-      count: { $sum: 1 }
+      film_count: { $sum: 1 }
   } },
   { $match: {
-      count: { $gt: 35 }
+      film_count: { $gt: 35 }
   } },
   { $project: {
       _id: 0,
-      actor: "$_id",
-      count: 1
+      first_name: "$_id",
+      film_count: 1
   } }
 ])
 ```
