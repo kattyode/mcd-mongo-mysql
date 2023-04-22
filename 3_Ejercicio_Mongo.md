@@ -181,5 +181,45 @@ Resultado:
 
 Respuesta:
 ```
-db.film_actor.aggregate(...
+
+db.film_actor.aggregate([
+  {
+    $lookup: {
+      from: "film_category",
+      localField: "film_id",
+      foreignField: "film_id",
+      as: "film_category"
+    }
+  },
+  {
+    $unwind: "$film_category"
+  },
+  {
+    $match: {
+      category_id: '6443f419563ebc7712d12693'
+    }
+  },
+  {
+    $group: {
+      _id: "$film_category",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      count: -1
+    }
+  },
+  {
+    $limit: 10
+  },
+  {
+    $project: {
+      _id: 0,
+      first_name: "$_id.first_name",
+      last_name: "$_id.last_name",
+      film_count: "$count"
+    }
+  }
+])
 ```
