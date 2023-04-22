@@ -169,7 +169,7 @@ JOIN film ON film_actor.film_id = film.film_id)
 JOIN film_category ON film.film_id = film_category.film_id)
 JOIN category ON film_category.category_id = category.category_id)
 where category.name <> 'Comedy'
-group by actor_id
+group by actor_id;
 
 
 ```
